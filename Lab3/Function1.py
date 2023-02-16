@@ -1,12 +1,10 @@
 def ounces(grams):
     print(grams * 28.3495231)
-
 gramm = float(input())
 ounces(gramm)
 
 def centigrade(f):
     print((5 / 9) * (f - 32))
-
 faren = float(input())
 centigrade(faren)
 
@@ -19,12 +17,15 @@ head = int(input())
 leg = int(input())
 solve(head, leg)
 
-def filter_prime(list):
-    for i in range(0, len(list)):
-        if list[i] % 2 == 0:
-            print(list[i])
-list = input()
-filter_prime(list)
+def filter_prime(lst):
+    for i in range(int(2), int(lst)):
+        if int(lst) % i == 0:
+            return False
+    return True
+lst = input().split()
+for i in list(lst):
+    if filter_prime(i):
+        print(i, end = " ")
 
 from itertools import permutations
 def perm(strg):
@@ -40,8 +41,9 @@ a = input().split()
 reverse(a)
 
 def has_33(lst):
-    if "3 3" in lst:
-        return True
+    for i in range(0, len(list(lst))):
+        if int(lst[i]) == int(lst[i+1]) == 3:
+            return True
     return False
 a = input().split()
 print(has_33(a))
