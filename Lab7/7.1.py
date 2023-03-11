@@ -37,12 +37,12 @@ while not done:
     sleep(1)
     sang += 6
 
-    if sang % 90 == 0:
+    if (sang - 270) % 360 == 0:
         mang += 6
         hang += 0.5
-    min = pygame.draw.line(screen, color, (256, 255), (256 + cos((mang / 180) * pi) * 160, 255 + sin((mang / 180) * pi) * 160), 7) #minutes
-    hrs = pygame.draw.line(screen, color, (256, 255), (256 + cos((hang / 180) * pi) * 120, 255 + sin((hang / 180) * pi) * 120), 7) #hours
-    sec = pygame.draw.line(screen, color, (256, 255), (256 + cos((sang / 180) * pi) * 180, 255 + sin((sang / 180) * pi) * 180), 5)  # seconds
+    min = pygame.draw.line(screen, color, (256, 256), (256 + cos((mang / 180) * pi) * 130, 256 + sin((mang / 180) * pi) * 130), 6) #minutes
+    hrs = pygame.draw.line(screen, color, (256, 256), (256 + cos((hang / 180) * pi) * 100, 256 + sin((hang / 180) * pi) * 100), 7) #hours
+    sec = pygame.draw.line(screen, (255, 0, 0), (256, 256), (256 + cos((sang / 180) * pi) * 150, 256 + sin((sang / 180) * pi) * 150), 5)  # seconds
 
     pygame.display.flip()
     clock.tick(10)
