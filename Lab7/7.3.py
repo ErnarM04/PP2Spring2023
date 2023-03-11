@@ -24,9 +24,9 @@ while not done:
 
     screen.fill((0, 0, 0))
     if is_blue:
-        color = (0, 128, 255)
+        color = (0, 0, 255)
     else:
-        color = (255, 100, 0)
+        color = (255, 0, 0)
     pygame.draw.circle(screen, color, (x, y), 25)
 
     pygame.display.flip()

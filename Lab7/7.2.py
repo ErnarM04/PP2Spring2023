@@ -21,17 +21,16 @@ def play_prev_song():
     pygame.mixer.music.load(_songs[0])
     pygame.mixer.music.play(0)
 
-i = 0
-
 def muspause():
-    global i
-    if i == 1:
-        pygame.mixer.music.unpause()
-        i = 0
-    else:
+    done = False
+    while not done:
         pygame.mixer.music.pause()
-        i = 1
-    clock.tick(10)
+        clock.tick(10)
+        pygame.event.poll()
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
+            pygame.mixer.music.unpause()
+            done = True
+
 
 while pygame.mixer.music.get_busy():
     for event in pygame.event.get():
