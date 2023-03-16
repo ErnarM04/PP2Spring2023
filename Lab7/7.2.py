@@ -5,7 +5,7 @@ _songs = ['Bring Me The Horizon Can You Feel My Heart.mp3', 'C418 Aria Math Mine
 
 pygame.mixer.init()
 pygame.display.set_mode((200,100))
-pygame.mixer.music.load("Bring Me The Horizon Can You Feel My Heart.mp3")
+pygame.mixer.music.load(_songs[0])
 pygame.mixer.music.play(0)
 clock.tick(10)
 
