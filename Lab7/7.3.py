@@ -19,7 +19,7 @@ while not done:
     if pressed[pygame.K_LEFT] and x >= 30: x -= 20
     if pressed[pygame.K_RIGHT] and x <= 1890: x += 20
 
-    screen.fill((0, 0, 0))
+    screen.fill((255, 255, 255))
 
     pygame.draw.circle(screen, (0, 0, 225), (x, y), 25)
 
