@@ -75,24 +75,16 @@ def game_over():
     game_over_surface = go_font.render(
         'Your Score is : ' + str(score), True, (255, 0, 0))
 
-    # create a rectangular object for the text
-    # surface object
+
     game_over_rect = game_over_surface.get_rect()
 
     # setting position of the text
     game_over_rect.midtop = (720 / 2, 480 / 4)
 
-    # blit will draw the text on screen
     surface.blit(game_over_surface, game_over_rect)
     pygame.display.flip()
-
-    # after 2 seconds we will quit the program
     time.sleep(2)
-
-    # deactivating pygame library
     pygame.quit()
-
-    # quit the program
     quit()
 
 
@@ -113,9 +105,6 @@ while True:
             if event.key == pygame.K_RIGHT:
                 change_to = 'RIGHT'
 
-    # If two keys pressed simultaneously
-    # we don't want snake to move into two
-    # directions simultaneously
     if change_to == 'UP' and direction != 'DOWN':
         direction = 'UP'
     if change_to == 'DOWN' and direction != 'UP':
