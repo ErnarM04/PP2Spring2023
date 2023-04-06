@@ -162,7 +162,6 @@ while True:
     # displaying score countinuously
     show_score()
     show_level()
-
     # Refresh game screen
     pygame.display.update()
 
