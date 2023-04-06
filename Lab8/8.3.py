@@ -16,11 +16,11 @@ class Circle():
         self.end_pos = start_pos  # (x2, y2)
 
     def draw(self):
-        start_pos_x = min(self.start_pos[0], self.end_pos[0])
-        start_pos_y = min(self.start_pos[1], self.end_pos[1])
+        start_pos_x = self.start_pos[0]
+        start_pos_y = self.start_pos[1]
 
-        end_pos_x = max(self.start_pos[0], self.end_pos[0])
-        end_pos_y = max(self.start_pos[1], self.end_pos[1])
+        end_pos_x = self.end_pos[0]
+        end_pos_y = self.end_pos[1]
 
         pygame.draw.circle(SCREEN, color, (start_pos_x, start_pos_y), math.sqrt((end_pos_x - start_pos_x) ** 2 + (end_pos_y - start_pos_y) ** 2), 5)
 
