@@ -35,7 +35,6 @@ class Rectangle():
     def draw(self):
         start_pos_x = min(self.start_pos[0], self.end_pos[0])
         start_pos_y = min(self.start_pos[1], self.end_pos[1])
-
         end_pos_x = max(self.start_pos[0], self.end_pos[0])
         end_pos_y = max(self.start_pos[1], self.end_pos[1])
 
