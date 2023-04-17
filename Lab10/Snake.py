@@ -66,7 +66,7 @@ def search_nick(nick):
 
 def delete_score(nick):
     cur = conn.cursor()
-    cur.execute("DELETE FROM phonebook WHERE nickname ILIKE %s", (nick,))
+    cur.execute("DELETE FROM Scores WHERE nickname ILIKE %s", (nick,))
     conn.commit()
     cur.close()
 
