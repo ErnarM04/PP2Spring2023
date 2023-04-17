@@ -64,6 +64,12 @@ def search_nick(nick):
     cur.close()
     return rows
 
+def delete_score(nick):
+    cur = conn.cursor()
+    cur.execute("DELETE FROM phonebook WHERE nickname ILIKE %s", (nick,))
+    conn.commit()
+    cur.close()
+
 font = pygame.font.SysFont(None, 100)
 nick = ""
 input_active = True
@@ -96,6 +102,7 @@ if row:
             if event.type == pygame.KEYDOWN and input_active:
                 if event.key == pygame.K_y:
                     score = 0
+                    delete_score(nick)
                     input_active = False
                 if event.key == pygame.K_n:
                     quit()
