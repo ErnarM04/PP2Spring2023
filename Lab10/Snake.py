@@ -50,7 +50,6 @@ def game_over():
     pygame.quit()
     quit()
 
-# Define a function to add a new entry to the Scores
 def add_data(nick, score):
     cur = conn.cursor()
     cur.execute("INSERT INTO Scores (nickname, score) VALUES (%s, %s)", (nick, score))
