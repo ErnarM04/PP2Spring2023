@@ -1,6 +1,5 @@
 import psycopg2, csv
 
-# Connect to the database
 conn = psycopg2.connect(
     host='localhost',
     dbname='Phonebook',
@@ -9,7 +8,6 @@ conn = psycopg2.connect(
     port = '6566'
 )
 
-# Define a function to add a new entry to the phonebook
 def add_entry(name, phone):
     cur = conn.cursor()
     cur.execute("INSERT INTO phonebook (name, phone) VALUES (%s, %s)", (name, phone))
@@ -22,7 +20,6 @@ def delete_entry(pattern):
     conn.commit()
     cur.close()
 
-# Define a function to display all entries in the phonebook
 def display_entries(page):
     cur = conn.cursor()
     cur.execute("SELECT * FROM phonebook")
@@ -41,7 +38,6 @@ def display_entries(page):
     if int(page) >= 1 and int(page) <= len(rows) // 10 + 1:
         display_entries(page)
 
-# Define a function to search for an entry by name
 def search_entry(name):
     cur = conn.cursor()
     cur.execute("SELECT * FROM phonebook WHERE name = %s", (name,))
@@ -58,16 +54,15 @@ def search_pattern(pattern):
 
 def update_user(name, phone):
     cur = conn.cursor()
-    cur.execute("SELECT COUNT(*) FROM phonebook WHERE name = %s", (name,))
-    count = cur.fetchone()[0]
-    if count == 0:
+    cur.execute("SELECT * FROM phonebook WHERE name = %s OR phone = %s", (name, phone))
+    user = cur.fetchone()
+    if user == None:
         cur.execute("INSERT INTO phonebook (name, phone) VALUES (%s, %s)", (name, phone))
     else:
         cur.execute("UPDATE phonebook SET phone = %s WHERE name = %s", (phone, name))
     conn.commit()
     cur.close()
 
-# Function to upload a CSV file into the phonebook table
 def upload_csv(filename):
     cur = conn.cursor()
     with open(filename, 'r') as csvfile:
@@ -80,7 +75,18 @@ def upload_csv(filename):
     conn.commit()
     cur.close()
 
-# Main program loop
+def many_users(name, phone):
+    cur = conn.cursor()
+    p = phone
+    cur.execute("SELECT * FROM phonebook WHERE phone = %s", (phone,))
+    phone = cur.fetchall()
+    if phone == []:
+        print(p, "does not exist")
+    else:
+        cur.execute("UPDATE phonebook SET name = %s WHERE phone = %s", (name, p))
+    conn.commit()
+    cur.close()
+
 while True:
     print("Phonebook Program")
     print("1. Add Entry")
@@ -91,7 +97,8 @@ while True:
     print("6. Update Entry")
     print("7. Upload CSV File")
     print("8. Quit")
-    choice = input("Enter your choice (1-8): ")
+    print("9. Many Users")
+    choice = input("Enter your choice (1-9): ")
 
     if choice == '1':
         name = input("Enter name: ")
@@ -121,8 +128,14 @@ while True:
         upload_csv(filename)
     elif choice == '8':
         break
+    elif choice == '9':
+        while True:
+            user = input("Enter username and phone number: ").split()
+            if user[0] == "Q" or user[0] == "q":
+                break
+            many_users(user[0], user[1])
+            print("Enter Q to quit")
     else:
         print("Invalid choice. Please try again.")
 
-# Close the database connection
 conn.close()
